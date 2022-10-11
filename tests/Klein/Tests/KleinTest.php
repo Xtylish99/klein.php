@@ -17,6 +17,7 @@ use Klein\DataCollection\RouteCollection;
 use Klein\Exceptions\DispatchHaltedException;
 use Klein\Exceptions\HttpException;
 use Klein\Exceptions\HttpExceptionInterface;
+use Klein\Exceptions\UnhandledException;
 use Klein\Klein;
 use Klein\Request;
 use Klein\Response;
@@ -369,14 +370,12 @@ class KleinTest extends AbstractKleinTest
 
         $this->klein_app->dispatch();
 
-        $this->expectOutputString(null);
+        $this->assertNull(null);
     }
 
-    /**
-     * @expectedException Klein\Exceptions\UnhandledException
-     */
     public function testAfterDispatchWithCallableThatThrowsException()
     {
+        $this->expectException(UnhandledException::class);
         $this->klein_app->afterDispatch(
             function ($klein) {
                 throw new Exception('testing');
@@ -391,11 +390,9 @@ class KleinTest extends AbstractKleinTest
         );
     }
 
-    /**
-     * @expectedException \Klein\Exceptions\UnhandledException
-     */
     public function testErrorsWithNoCallbacks()
     {
+        $this->expectException(\Klein\Exceptions\UnhandledException::class);
         $this->klein_app->respond(
             function ($request, $response, $service) {
                 throw new Exception('testing');

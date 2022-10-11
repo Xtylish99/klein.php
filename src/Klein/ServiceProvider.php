@@ -104,6 +104,11 @@ class ServiceProvider
         return $this;
     }
 
+    public function isBond() : bool
+    {
+        return ($this->request && $this->response);
+    }
+
     /**
      * Returns the shared data collection object
      *
@@ -218,7 +223,7 @@ class ServiceProvider
 
         // Encode our args so we can insert them into an HTML string
         foreach ($args as &$arg) {
-            $arg = htmlentities($arg, ENT_QUOTES, 'UTF-8');
+            $arg = htmlentities($arg ?? "", ENT_QUOTES, 'UTF-8');
         }
 
         // Actually do our markdown conversion
