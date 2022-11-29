@@ -951,7 +951,13 @@ class Klein
                     ob_end_clean();
                 }
 
-                throw new UnhandledException($msg, $err->getCode(), $err);
+                $errorCode = 0;
+                if (is_int($err->getCode()))
+                {
+                    $errorCode = $err->getCode();
+                }
+
+                throw new UnhandledException($msg, $errorCode, $err);
             }
         } catch (Throwable $e) { // PHP 7 compatibility
             // Make sure to clean the output buffer before bailing
