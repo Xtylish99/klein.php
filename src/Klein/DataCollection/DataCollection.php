@@ -15,6 +15,7 @@ use ArrayAccess;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
+use ReturnTypeWillChange;
 
 /**
  * DataCollection
@@ -353,7 +354,7 @@ class DataCollection implements IteratorAggregate, ArrayAccess, Countable
      * @see \IteratorAggregate::getIterator()
      * @return ArrayIterator
      */
-    public function getIterator()
+    #[ReturnTypeWillChange] public function getIterator()
     {
         return new ArrayIterator($this->attributes);
     }
