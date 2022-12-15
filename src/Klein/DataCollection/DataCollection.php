@@ -15,7 +15,6 @@ use ArrayAccess;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
-use ReturnTypeWillChange;
 
 /**
  * DataCollection
@@ -26,7 +25,7 @@ use ReturnTypeWillChange;
  * Inspired by @fabpot's Symfony 2's HttpFoundation
  * @link https://github.com/symfony/HttpFoundation/blob/master/ParameterBag.php
  */
-class DataCollection implements IteratorAggregate, ArrayAccess, Countable
+class DataCollection implements IteratorAggregate, Countable
 {
 
     /**
@@ -354,7 +353,7 @@ class DataCollection implements IteratorAggregate, ArrayAccess, Countable
      * @see \IteratorAggregate::getIterator()
      * @return ArrayIterator
      */
-    #[ReturnTypeWillChange] public function getIterator()
+    public function getIterator()
     {
         return new ArrayIterator($this->attributes);
     }
@@ -369,7 +368,7 @@ class DataCollection implements IteratorAggregate, ArrayAccess, Countable
      * @param string $key   The name of the parameter to return
      * @return mixed
      */
-    #[ReturnTypeWillChange] public function offsetGet($key)
+    public function offsetGet($key)
     {
         return $this->get($key);
     }
@@ -385,7 +384,7 @@ class DataCollection implements IteratorAggregate, ArrayAccess, Countable
      * @param mixed  $value The value of the parameter to set
      * @return void
      */
-    #[ReturnTypeWillChange] public function offsetSet($key, $value)
+    public function offsetSet($key, $value)
     {
         $this->set($key, $value);
     }
@@ -400,7 +399,7 @@ class DataCollection implements IteratorAggregate, ArrayAccess, Countable
      * @param string $key   The name of the parameter
      * @return boolean
      */
-    #[ReturnTypeWillChange] public function offsetExists($key)
+    public function offsetExists($key)
     {
         return $this->exists($key);
     }
@@ -415,7 +414,7 @@ class DataCollection implements IteratorAggregate, ArrayAccess, Countable
      * @param string $key   The name of the parameter
      * @return void
      */
-    #[ReturnTypeWillChange] public function offsetUnset($key)
+    public function offsetUnset($key)
     {
         $this->remove($key);
     }
@@ -429,7 +428,7 @@ class DataCollection implements IteratorAggregate, ArrayAccess, Countable
      * @see \Countable::count()
      * @return int
      */
-    #[ReturnTypeWillChange] public function count()
+    public function count()
     {
         return count($this->attributes);
     }
