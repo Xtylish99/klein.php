@@ -210,16 +210,16 @@ class Klein
      * Create a new Klein instance with optionally injected dependencies
      * This DI allows for easy testing, object mocking, or class extension
      *
-     * @param ServiceProvider $service              Service provider object responsible for utilitarian behaviors
-     * @param mixed $app                            An object passed to each route callback, defaults to an App instance
-     * @param RouteCollection $routes               Collection object responsible for containing all route instances
-     * @param AbstractRouteFactory $route_factory   A factory class responsible for creating Route instances
+     * @param ServiceProvider|null $service Service provider object responsible for utilitarian behaviors
+     * @param App|null $app An object passed to each route callback, defaults to an App instance
+     * @param RouteCollection|null $routes Collection object responsible for containing all route instances
+     * @param AbstractRouteFactory|null $route_factory A factory class responsible for creating Route instances
      */
     public function __construct(
-        ServiceProvider $service = null,
-        $app = null,
-        RouteCollection $routes = null,
-        AbstractRouteFactory $route_factory = null
+        ?ServiceProvider $service = null,
+        ?App $app = null,
+        ?RouteCollection $routes = null,
+        ?AbstractRouteFactory $route_factory = null
     ) {
         // Instanciate and fall back to defaults
         $this->service       = $service       ?: new ServiceProvider();
@@ -405,15 +405,15 @@ class Klein
      * Dispatch with optionally injected dependencies
      * This DI allows for easy testing, object mocking, or class extension
      *
-     * @param Request $request              The request object to give to each callback
-     * @param AbstractResponse $response    The response object to give to each callback
-     * @param boolean $send_response        Whether or not to "send" the response after the last route has been matched
-     * @param int $capture                  Specify a DISPATCH_* constant to change the output capturing behavior
+     * @param Request|null $request The request object to give to each callback
+     * @param AbstractResponse|null $response The response object to give to each callback
+     * @param boolean $send_response Whether or not to "send" the response after the last route has been matched
+     * @param int $capture Specify a DISPATCH_* constant to change the output capturing behavior
      * @return void|string
      */
     public function dispatch(
-        Request $request = null,
-        AbstractResponse $response = null,
+        ?Request $request = null,
+        ?AbstractResponse $response = null,
         $send_response = true,
         $capture = self::DISPATCH_NO_CAPTURE
     ) {
@@ -815,13 +815,12 @@ class Klein
      * inspired by a similar effort by Gilles Bouthenot (@gbouthenot)
      *
      * @link https://github.com/gbouthenot
-     * @param string $route_name        The name of the route
-     * @param array $params             The array of placeholder fillers
-     * @param boolean $flatten_regex    Optionally flatten custom regular expressions to "/"
-     * @throws OutOfBoundsException     If the route requested doesn't exist
+     * @param string $route_name The name of the route
+     * @param array|null $params The array of placeholder fillers
+     * @param boolean $flatten_regex Optionally flatten custom regular expressions to "/"
      * @return string
      */
-    public function getPathFor($route_name, array $params = null, $flatten_regex = true)
+    public function getPathFor($route_name, ?array $params = null, $flatten_regex = true)
     {
         // First, grab the route
         $route = $this->routes->get($route_name);

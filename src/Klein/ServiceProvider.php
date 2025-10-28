@@ -76,10 +76,10 @@ class ServiceProvider
     /**
      * Constructor
      *
-     * @param Request $request              Object containing all HTTP request data and behaviors
-     * @param AbstractResponse $response    Object containing all HTTP response data and behaviors
+     * @param Request|null $request Object containing all HTTP request data and behaviors
+     * @param AbstractResponse|null $response Object containing all HTTP response data and behaviors
      */
-    public function __construct(Request $request = null, AbstractResponse $response = null)
+    public function __construct(?Request $request = null, ?AbstractResponse $response = null)
     {
         // Bind our objects
         $this->bind($request, $response);
@@ -91,11 +91,11 @@ class ServiceProvider
     /**
      * Bind object instances to this service
      *
-     * @param Request $request              Object containing all HTTP request data and behaviors
-     * @param AbstractResponse $response    Object containing all HTTP response data and behaviors
+     * @param Request|null $request Object containing all HTTP request data and behaviors
+     * @param AbstractResponse|null $response Object containing all HTTP response data and behaviors
      * @return ServiceProvider
      */
-    public function bind(Request $request = null, AbstractResponse $response = null)
+    public function bind(?Request $request = null, ?AbstractResponse $response = null)
     {
         // Keep references
         $this->request  = $request  ?: $this->request;

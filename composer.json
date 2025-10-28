@@ -20,12 +20,11 @@
       {
          "name": "Santiago Gómez",
          "email": "scener.f360@gmail.com",
-         "homepage": "",
          "role": "Contributor/Developer"
       }
    ],
    "require": {
-      "php": ">=7.4",
+      "php": "8.1.* | 8.4.*",
      "ext-ctype": "*"
    },
    "require-dev": {
